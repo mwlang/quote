@@ -15,7 +15,8 @@ add_action('media_buttons_context', 'jsAddQuoteButton');
 function jsAddQuotePopup() {
   $quotes = get_posts(array('post_type' => 'quote'));
   foreach ($quotes as $quote) {
-    $quote_data[$quote->ID] = (strlen($quote->post_content) > 40) ? substr($quote->post_content, 0, 37) . '...' : $quote->post_content;
+    $author = get_post_meta($quote->ID, 'quote_author', true);
+    $quote_data[$quote->ID] = $author . " > " . ((strlen($quote->post_content) > 40) ? substr($quote->post_content, 0, 37) . '...' : $quote->post_content);
   }
   ?>
   <div id="insert_quote" class="folded" style="display:none;">
@@ -166,7 +167,7 @@ function QuoteFunc($atts) {
 
   $query = new WP_Query($args);
 
-  echo "<table>";
+  echo "<table id='quotes'>";
   
   while ($query->have_posts()) {
     $query->the_post();
