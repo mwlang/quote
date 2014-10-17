@@ -5,7 +5,7 @@
 
 // Action target that adds the "Insert Product(s)" button to the post/page edit screen.
 function jsAddQuoteButton($context) {
-    $image_btn = plugins_url('images/quote-space-icon.png', dirname(__FILE__));
+    $image_btn = plugins_url('images/quotes.png', dirname(__FILE__));
     $out = '<a href="#TB_inline?width=450&height=700&inlineId=insert_quote" class="button thickbox" title="Insert Quote"><img src="'.$image_btn.'" alt="Insert Quote" /> Add Quote</a>';
     return $context . $out;
 }
@@ -66,7 +66,7 @@ function jsAddQuotePopup() {
               <tr>
                 <th class="label" style="width:200px;">Display excerpt quote(s)?</th>
                 <td class="field">
-                  <input type="checkbox" id="js_quote_shortcode_except" name="excerpt" value="1" />
+                  <input type="checkbox" id="js_quote_shortcode_excerpt" name="excerpt" value="1" />
 
                 </td>
               </tr>
@@ -91,19 +91,19 @@ function jsAddQuotePopup() {
   <script type="text/javascript">
 
     function InsertquoteQuote() {
-      var quote  = jQuery("#js_quotes_shortcode_select").val();
-      var random = jQuery("#js_quote_shortcode_random").attr('checked') ? ' random="true"' : '';
-      var except = jQuery("#js_quote_shortcode_excerpt").attr('checked') ? ' excerpt="true"' : '';
-      var number = jQuery("#js_quote_shortcode_number").val();
-      var cat    = jQuery("#js_quote_shortcode_cat").val();
-      var win    = window.dialogArguments || opener || parent || top;
+      var quote   = jQuery("#js_quotes_shortcode_select").val();
+      var random  = jQuery("#js_quote_shortcode_random").attr('checked') ? ' random="true"' : '';
+      var excerpt = jQuery("#js_quote_shortcode_excerpt").attr('checked') ? ' excerpt="true"' : '';
+      var number  = jQuery("#js_quote_shortcode_number").val();
+      var cat     = jQuery("#js_quote_shortcode_cat").val();
+      var win     = window.dialogArguments || opener || parent || top;
 
       cat = cat ? ' cat="' + cat.join(',') + '"' : '';
 
       if (quote){
         select = jQuery("#js_quotes_shortcode_select");
         select.val(jQuery('options:first', select).val());
-        win.send_to_editor('[quotes id="' + quote + excerpt + '"]');
+        win.send_to_editor('[quotes id="' + quote + '"' + excerpt + ']');
       } else if (number && (jQuery.isNumeric(number) || number == 'all')) {
         jQuery("#js_quote_shortcode_number").attr('value', '');
         jQuery("#js_quote_shortcode_random").removeAttr('checked');
