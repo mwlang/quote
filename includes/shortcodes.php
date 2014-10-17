@@ -181,7 +181,7 @@ function QuoteFunc($atts) {
       $quote = $post->post_content ? : "No Quote!";
     }
 
-    echo "<blockquote>".$quote."</blockquote>";
+    echo "<blockquote>".$quote."<span class='tail'/></blockquote>";
     
     echo "</td><td class=person>";
     
