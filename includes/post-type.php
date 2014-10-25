@@ -63,6 +63,7 @@ function quotes_taxonomy_init() {
     'query_var'    => true,
     'rewrite'      => array('slug' => 'quotes-categories'),
   );
-  register_taxonomy('quotes_category', 'quotes', $args);
+  register_taxonomy('quotes_category', 'quote', $args);
 }
 add_action('init', 'quotes_taxonomy_init');
+

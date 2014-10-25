@@ -167,13 +167,12 @@ function QuoteFunc($atts) {
 
   $query = new WP_Query($args);
 
-  echo "<table id='quotes'>";
   
   while ($query->have_posts()) {
     $query->the_post();
     $post = get_post();
 
-    echo "<tr><td class=quote>";
+    echo "<div class='quote-container'>";
 
     if ($excerpt) {
       $quote = $post->post_excerpt ? : $post->post_content ? : "No Excerpt!";
@@ -181,9 +180,9 @@ function QuoteFunc($atts) {
       $quote = $post->post_content ? : "No Quote!";
     }
 
-    echo "<blockquote>".$quote."<span class='tail'/></blockquote>";
+    echo "<div class=quote-content><blockquote>".$quote."<span class='tail'/></blockquote></div>";
     
-    echo "</td><td class=person>";
+    echo "<div class=quote-source>";
     
     $quote_author = get_post_meta(get_the_ID(), 'quote_author', true);
     $quote_author_email = get_post_meta(get_the_ID(), 'quote_author_email', true);
@@ -192,19 +191,18 @@ function QuoteFunc($atts) {
 
     if (!empty($quote_author) || !empty($quote_where)) {
       if (!$hide_author) {
-        if (!empty($quote_author_email)) { echo get_avatar($quote_author_email) . '<br/>'; };
-        if (!empty($quote_author)) { echo '<span>'.$quote_author.'</span><br/>'; };
+        if (!empty($quote_author_email)) { echo '<span class=quote-email>' . get_avatar($quote_author_email) . '</span>'; };
+        if (!empty($quote_author)) { echo '<span class=quote-author>'.$quote_author.'</span>'; };
       }
 
       if (!empty($quote_where)) {
-        echo '<span>'.$quote_where.'</span>';
+        echo '<span class=quote-where>'.$quote_where.'</span>';
       }
     }
     
-    echo '</td></tr>';
+    echo '</div></div>';
     
   }
-  echo "</table>";
   
   wp_reset_postdata();
   $content = ob_get_clean();
