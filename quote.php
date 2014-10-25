@@ -26,6 +26,7 @@ function quotes_edit_columns($columns){
     'cb'                   => "<input type=\"checkbox\" />",
     'title'                => 'Title',
     'quote-author'         => 'Author',
+    'category'             => 'Category',
     'shortcode'            => 'Shortcode',
     'quote'                => 'Quote',
   );
